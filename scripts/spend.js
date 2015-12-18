@@ -38,8 +38,8 @@ insight.getUnspentUtxos(funding.address, function(err, utxos) {
   coopTransaction.inputs[0].setScript(
     Script.empty()
       .add('OP_0')
-      .add(receiverSig.toTxFormat())
       .add(senderSig.toTxFormat())
+      .add(receiverSig.toTxFormat())
       .add('OP_TRUE') // choose the multisig path
       .add(funding.redeemScript.toBuffer())
   );
