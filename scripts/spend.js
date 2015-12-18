@@ -62,6 +62,7 @@ insight.getUnspentUtxos(funding.address, function(err, utxos) {
 
   timeTransaction.inputs[0].setScript(
     Script.empty()
+      .add('OP_0')
       .add(signature.toTxFormat())
       .add(config.senderPrivkey.toPublicKey().toBuffer())
       .add(funding.redeemScript.toBuffer())
