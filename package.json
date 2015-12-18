@@ -1,0 +1,36 @@
+{
+  "name": "bitcore-stream",
+  "version": "1.0.0",
+  "description": "Payment Channels for Bitcore",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yemel/bitcore-stream.git"
+  },
+  "keywords": [
+    "bitcoin"
+  ],
+  "author": "Yemel Jardi",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/yemel/bitcore-stream/issues"
+  },
+  "homepage": "https://github.com/yemel/bitcore-stream#readme",
+  "dependencies": {
+    "bitcore-explorers": "^1.0.1",
+    "bitcore-lib": "^0.13.11",
+    "inherits": "^2.0.1",
+    "lodash": "^3.10.1"
+  },
+  "devDependencies": {
+    "assert": "^1.1.2",
+    "bitcore-build": "git://github.com/bitpay/bitcore-build.git",
+    "brfs": "^1.2.0",
+    "chai": "^1.10.0",
+    "gulp": "^3.8.10",
+    "mocha": "^2.2.5"
+  }
+}
