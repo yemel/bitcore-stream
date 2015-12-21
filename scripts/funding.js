@@ -18,6 +18,7 @@ var script = redeemScript.toScriptHashOut();
 var address = script.toAddress();
 
 console.log('Funding Address:', address.toString());
+console.log('Funding Script Hash:', address.hashBuffer.toString('hex'));
 console.log('Redeem Script\n', redeemScript.toString());
 
 module.exports.address = address;

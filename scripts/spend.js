@@ -64,11 +64,12 @@ insight.getUnspentUtxos(funding.address, function(err, utxos) {
   timeTransaction.inputs[0].setScript(
     Script.empty()
       .add(signature.toTxFormat())
-      .add(config.senderPrivkey.toPublicKey().toBuffer())
+      .add('OP_FALSE')
       .add(funding.redeemScript.toBuffer())
   );
 
   console.log('\n\nTimeout Transaction');
-  console.log(coopTransaction.serialize(true));
+  console.log(timeTransaction.id);
+  console.log(timeTransaction.serialize(true));
 
 });

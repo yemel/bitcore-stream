@@ -38,7 +38,7 @@ function buildFundingScript(senderPubkey, receiverPubkey, height) {
       .add(BN.fromNumber(height).toScriptNumBuffer())
       .add('OP_CHECKLOCKTIMEVERIFY').add('OP_DROP')
       .add(senderPubkey.toBuffer())
-      .add('OP_CHECKSIGVERIFY')
+      .add('OP_CHECKSIG')
     .add('OP_ENDIF');
 }
 

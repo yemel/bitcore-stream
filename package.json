@@ -14,7 +14,7 @@
     "bitcoin"
   ],
   "author": "Yemel Jardi",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/yemel/bitcore-stream/issues"
   },
