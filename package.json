@@ -23,7 +23,9 @@
     "bitcore-explorers": "^1.0.1",
     "bitcore-lib": "^0.13.11",
     "inherits": "^2.0.1",
-    "lodash": "^3.10.1"
+    "lodash": "^3.10.1",
+    "socket.io": "^1.3.7",
+    "socket.io-client": "^1.3.7"
   },
   "devDependencies": {
     "assert": "^1.1.2",

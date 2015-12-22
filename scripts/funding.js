@@ -5,7 +5,7 @@
 var bitcore = require('bitcore-lib');
 var PrivateKey = bitcore.PrivateKey;
 
-var bitcoreStream = require('../index');
+var bitcoreStream = require('../lib/utils');
 var config = require('./config');
 
 var redeemScript = bitcoreStream.buildFundingScript(
