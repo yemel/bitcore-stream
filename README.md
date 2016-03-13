@@ -74,3 +74,42 @@ OP_TRUE <SIGNATURE1> <SIGNATURE2> OP_0
 ```
 OP_FALSE <SIGNATURE1>
 ```
+
+# HTLC Channel
+Payment channel that allows proxy payments through it.
+
+## Open Transaction
+
+![Open Transaction](/images/open_tx.png?raw=true "Open transaction")
+
+**Inputs:** UTXOs from A and B to fund the channel.
+
+**Output 1:** A change address
+```
+OP_DUP OP_HASH160 <PUBKEY_HASH_A> OP_EQUALVERIFY OP_CHECKSIG
+```
+
+**Output 2:** B change address
+```
+OP_DUP OP_HASH160 <PUBKEY_HASH_B> OP_EQUALVERIFY OP_CHECKSIG
+```
+
+**Output 3:** A Channel Balance - Multisig or only A after 30 days.
+```
+OP_IF
+    2 <PUBKEY_A> <PUBKEY_B> 2 OP_CHECKMULTISIG
+OP_ELSE
+    <30DAYS> OP_CLTV OP_DROP
+    <PUBKEY_A> OP_CHECKSIG
+OP_ENDIF
+```
+
+**Output 4:** B Channel Balance - Multisig or only B after 30 days.
+```
+OP_IF
+    2 <PUBKEY_A> <PUBKEY_B> 2 OP_CHECKMULTISIG
+OP_ELSE
+    <30DAYS> OP_CLTV OP_DROP
+    <PUBKEY_B> OP_CHECKSIG
+OP_ENDIF
+```
