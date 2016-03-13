@@ -140,7 +140,7 @@ var openTransaction = new Transaction()
     .to(otherPubkey.toAddress(), otherChange)
     .to(channelAddress, channelBalance)
     .to(otherChannelAddress, otherChannelBalance)
-    .sign(utxosPrivateKeys)
+    .sign(utxosPrivateKeys, bitcore.crypto.Signature.SIGHASH_ANYONECANPAY)
 
 var serialized = openTransaction.toObject();
 
@@ -172,7 +172,7 @@ var privKey = new bitcore.PrivateKey('...');
 
 var openTransaction = Transaction.fromObject(serialized)
     .from(utxos)
-    .signed(utxosPrivateKeys)
+    .sign(utxosPrivateKeys)
 
 assert(openTransaction.isFullySigned())
 ```
