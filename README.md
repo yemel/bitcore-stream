@@ -113,3 +113,13 @@ OP_ELSE
     <PUBKEY_B> OP_CHECKSIG
 OP_ENDIF
 ```
+
+
+
+# Credits
+
+* HTLC channel design and images from Mats Jerratsch's [Thunder Network](https://matsjj.github.io/)
+* Thanks to [Esteban Ordano](https://github.com/eordano) for peer review and a lifetime building things together.
+* Thanks to all contributors of [bitcore.io](https://bitcore.io) and [streamium.io](https://stramium.io).
+
+
