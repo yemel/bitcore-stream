@@ -114,11 +114,73 @@ OP_ELSE
 OP_ENDIF
 ```
 
+**API**
+```javascript
+// Client side
+var EXPIRATION = 80000; // Block Height
+
+var utxos = [...];
+var utxosPrivateKeys = [...];
+
+var privKey = new bitcore.PrivateKey('...');
+var pubKey = privKey.publicKey;
+var inputBalance = utxos.reduce(x, total => x.amount + total, 0)
+var channelBalance = 30000;
+
+var otherPubkey = new bitcore.PublicKey('...');
+var otherChannelBalance = 30000;
+var otherChange = 10000;
+
+var channelAddress = channelScript(pubKey, otherPubkey, EXPIRATION).toScriptHashOut().toAddress();
+var otherChannelAddress = channelScript(otherPubkey, pubkey, EXPIRATION).toScriptHashOut().toAddress();
+
+var openTransaction = new Transaction()
+    .from(utxos)
+    .to(myPrivKey.toAddress(), inputBalance - channelBalance)
+    .to(otherPubkey.toAddress(), otherChange)
+    .to(channelAddress, channelBalance)
+    .to(otherChannelAddress, otherChannelBalance)
+    .sign(utxosPrivateKeys)
+
+var serialized = openTransaction.toObject();
+
+function channelScript(pubkey1, pubkey2, height) {
+    var sortedPubkeys = [pubkey1, pubkey2].sort(function(k1, k2) {
+        return k1.toString() > k2.toString() ? 1 : -1;
+    }));
+
+    return Script.empty()
+        .add('OP_IF')
+          .add('OP_2')
+          .add(sortedPubkeys[0].toBuffer())
+          .add(sortedPubkeys[1].toBuffer())
+          .add('OP_2')
+          .add('OP_CHECKMULTISIG')
+        .add('OP_ELSE')
+          .add(BN.fromNumber(height).toScriptNumBuffer())
+          .add('OP_CHECKLOCKTIMEVERIFY').add('OP_DROP')
+          .add(pubkey1.toBuffer())
+          .add('OP_CHECKSIG')
+        .add('OP_ENDIF');
+}
+
+// Server side
+var utxos = [...];
+var utxosPrivateKeys = [...];
+
+var privKey = new bitcore.PrivateKey('...');
+
+var openTransaction = Transaction.fromObject(serialized)
+    .from(utxos)
+    .signed(utxosPrivateKeys)
+
+assert(openTransaction.isFullySigned())
+```
 
 
 # Credits
 
-* HTLC channel design and images from Mats Jerratsch's [Thunder Network](https://matsjj.github.io/)
+* HTLC channel design and images from Mats Jerratsch's [Thunder Network](https://matsjj.github.io/).
 * Thanks to [Esteban Ordano](https://github.com/eordano) for peer review and a lifetime building things together.
 * Thanks to all contributors of [bitcore.io](https://bitcore.io) and [streamium.io](https://stramium.io).
 
